@@ -9,7 +9,7 @@ const ctx = canvas.getContext('2d');
 
 
 canvas.width = innerWidth
-canvas.height = innerHeight
+canvas.height = innerHeight/1.5
 
 const randomY = Math.floor(Math.random() * canvas.height);
 const randomX = Math.floor(Math.random() * (300 - 100 + 1)) + 50
@@ -80,46 +80,50 @@ function startGame () {
     }
     
 
- // ------------------ Collisions ------------------
-
- zombies.forEach((zombie, index) => {
+ // ------------------ Collisions ------------------//
 
 // Robot - Zombie //
-
-if (robot.x < zombie.x + zombie.width &&
-    robot.x + robot.width > zombie.x &&
-    robot.y < zombie.y + zombie.height &&
-    robot.y + robot.height > zombie.y) {
-        zombies.splice(index, 1);
-    }
+ zombies.forEach((zombie, index) => {
+    if (robot.x < zombie.x + zombie.width &&
+        robot.x + robot.width > zombie.x &&
+        robot.y < zombie.y + zombie.height &&
+        robot.y + robot.height > zombie.y) {
+            zombies.splice(index, 1)
+            console.log("zombie death");
+        }
 })
 // Human - Zombie //
-humans.forEach((human, index) => {
-if (zombie.x < human.x + human.width &&
-    zombie.x + human.width > human.x &&
-    zombie.y < human.y + human.height &&
-    zombie.y + zombie.height > human.y) {
-        humans.splice(index, 1);
-        
-    }
-})
+
+humans.forEach(function(human, i) {
+    zombies.forEach(function(zombie, j) {
+      if (zombie.x + zombie.width > human.x &&
+        zombie.x < human.x + human.width &&
+        zombie.y + zombie.height > human.y &&
+        zombie.y < human.y + human.height) {
+        humans.splice(i, 1);
+      }
+    });
+  });
+
 
 
     // remove zombies if they reach the limit//
-    humans.forEach((zombie, index) => {
-        if (zombie.y === 0) {
-            zombie.splice(index, 1)
-        }
-        })
+
+zombies.forEach((zombie, index) => {  
+if (zombie.x < 0) {
+    zombies.splice(index, 1)
+}
+})
 
     // remove humans if they reach the boat//
 humans.forEach((human, index) => {
-if (human.y === 0) {
-    humans.splice(index, 1)
+if (human.y < 0) {
+   humans.splice(index, 1)
 }
 })
+
     } 
-    , 1000 / 60)
+    , 1000 / 30)
 }
 
 // ------------------ Event listeners ------------------ //

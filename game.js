@@ -25,17 +25,13 @@ const robot = new Robot(
 
   const zombie = new Zombies(
     canvas.width,
-    randomY,
-    20,
-    40,
+    this.y,
     ctx
   )
 
   const human = new Humans(
     canvas.width  - 10,
-    randomX,
-    20,
-    40,
+    this.x,
     ctx
   )
   
@@ -69,17 +65,17 @@ function startGame () {
     // Create random zombie //
 
     if (frames % 50 === 0) {
-        const zombie = new Zombies(canvas.width, randomY, 70, 100, ctx);
+        const randomY = Math.floor(Math.random() * canvas.height);
+        const zombie = new Zombies(canvas.width, randomY, ctx);
         zombies.push(zombie);
       }
       
-
-
       // Create random human //
 
 
-    if (frames % 50 === 0){
-        const human = new Humans(randomX, 700, 50, 70, ctx);
+    if (frames % 10 === 0){
+        const randomX = Math.floor(Math.random() * (300 - 100 + 1)) + 50
+        const human = new Humans(randomX, canvas.height, ctx);
         humans.push(human)
     }
     
@@ -96,26 +92,33 @@ if (robot.x < zombie.x + zombie.width &&
     robot.y + robot.height > zombie.y) {
         zombies.splice(index, 1);
     }
-
+})
 // Human - Zombie //
-
-if (human.x < zombie.x + zombie.width &&
-    human.x + human.width > zombie.x &&
-    human.y < zombie.y + zombie.height &&
-    human.y + human.height > zombie.y) {
+humans.forEach((human, index) => {
+if (zombie.x < human.x + human.width &&
+    zombie.x + human.width > human.x &&
+    zombie.y < human.y + human.height &&
+    zombie.y + zombie.height > human.y) {
         humans.splice(index, 1);
+        
     }
-
 })
 
+
+    // remove zombies if they reach the limit//
+    humans.forEach((zombie, index) => {
+        if (zombie.y === 0) {
+            zombie.splice(index, 1)
+        }
+        })
 
     // remove humans if they reach the boat//
 humans.forEach((human, index) => {
-if (human.y < canvas.height) {
+if (human.y === 0) {
     humans.splice(index, 1)
 }
 })
-    }
+    } 
     , 1000 / 60)
 }
 

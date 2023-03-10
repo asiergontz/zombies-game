@@ -30,11 +30,11 @@ class Robot {
 }
 
 class Zombies {
-    constructor (x, y, width ctx ){
+    constructor (x, y, ctx ){
         this.x = x;
         this.y = y;
-        this.width = width;
-        this.height = height;
+        this.width = 40;
+        this.height = 60;
         this.image = new Image();
         this.image.src = 'images/zombie.png';
         this.ctx = ctx;
@@ -50,11 +50,11 @@ class Zombies {
 }
 
 class Humans {
-    constructor (x, y, width, height, ctx ){
+    constructor (x, y,ctx ){
         this.x = x;
         this.y = y;
-        this.width = width;
-        this.height = height;
+        this.width = 20;
+        this.height = 40;
         this.image = new Image();
         this.image.src = 'images/human.png';
         this.ctx = ctx;

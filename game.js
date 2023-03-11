@@ -11,10 +11,14 @@ const ctx = canvas.getContext('2d');
 canvas.width = innerWidth
 canvas.height = innerHeight/1.5
 
+// ------------------ random variables ------------------ //
+
 const randomY = Math.floor(Math.random() * canvas.height);
 const randomX = Math.floor(Math.random() * (300 - 100 + 1)) + 50
+let humansSaved = 0
+let humansDead = 0
 
-
+// ------------------ the gang ------------------ //
 const robot = new Robot(
     canvas.width / 2,
     canvas.height /2,
@@ -101,6 +105,7 @@ humans.forEach(function(human, i) {
         zombie.y + zombie.height > human.y &&
         zombie.y < human.y + human.height) {
         humans.splice(i, 1);
+        console.log(humansDead++)
       }
     });
   });
@@ -115,25 +120,42 @@ if (zombie.x < 0) {
 }
 })
 
+
     // remove humans if they reach the boat//
 humans.forEach((human, index) => {
 if (human.y < 0) {
    humans.splice(index, 1)
+    humansSaved++
 }
+
+// ------------------ Game Stoppers ------------------ //
+
+if (humansSaved === 100) {
+    clearInterval(gameInterval)
+    console.log("YOU WON!")
+}
+
+if (humansDead === 10) {
+    clearInterval(gameInterval)
+    console.log("YOU LOST!")
+}
+
 })
 
-    } 
-    , 1000 / 30)
+ } , 1000 / 30)
+ 
+
 }
+
+
+
 
 // ------------------ Event listeners ------------------ //
 
  window.addEventListener('keydown', (event) => {
-    console.log("hello")
          switch (event.code) {
              case "ArrowLeft":
                  robot.moveLeft();
-                 console.log("left")
                  break;
              case "ArrowRight":
                  robot.moveRight();
@@ -141,9 +163,24 @@ if (human.y < 0) {
              case "ArrowUp":
                  robot.moveUp();
                  break;
+
              case "ArrowDown":
                  robot.moveDown();
                  break;
+
+                 /*case "ArrowUp":
+                    if (event.code === 'ArrowUp' && event.code === 'ArrowLeft') {
+        
+                        robot.moveUpLeft()
+                        console.log("horizontal")
+                    } else {
+                        robot.moveUp();
+                    }
+                    break;*/
+             
+
+            
+            
          }
 
          // robot not leaving the canvas//

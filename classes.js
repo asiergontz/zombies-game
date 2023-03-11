@@ -27,6 +27,26 @@ class Robot {
     moveDown() {
         this.y +=15
     }
+
+    moveUpLeft() {
+        this.x -= 15;
+        this.y -= 15;
+    }
+
+    moveUpRight() {
+        this.x += 15;
+        this.y -= 15;
+    }
+
+    moveDownLeft() {
+        this.x -= 15;
+        this.y += 15;
+    }
+
+    moveDownRight() {
+        this.x += 15;
+        this.y += 15;
+    }
 }
 
 class Zombies {

@@ -1,8 +1,32 @@
-#game-board{
-    background-color: bisque;
-    border: 1px solid black
-}
+
 
 body {
     overflow: hidden;
   }
+
+#start-background{
+width: 1000px;
+height: 600px;
+display: block;
+margin: auto;
+}
+
+#canvas{
+    width: 1000px;
+    height: 600px;
+    display: block;
+    margin: auto;
+    border: 1px solid black
+    }
+
+
+
+#start-button{
+    background-image: url(images/Button-PNG.png);
+    background-size: cover;
+    background-position: center; 
+    width: 280px;
+    height: 120px;
+    border: none; 
+    cursor: pointer;
+}

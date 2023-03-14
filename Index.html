@@ -1,19 +1,30 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
     <title>Document</title>
-</head>
-<body id="game"> 
-    <button id="start-button">StartGame</button>
+  </head>
+  <body>
+    <div id="instructions">
+      <img id =start-background src=images/startbackground.png alt="start
+      background">
+
+      <a href="#" class="boton-imagen">
+        <img
+          id="start-button"
+          src="images/start-game.png"
+          alt="Botón"
+          style="position: absolute; top: 400px; left: 320px"
+        />
+      </a>
+    </div>
     <div id="game-board">
-        <canvas id="canvas"></canvas>
-      </div>
+        
+    </div>
     <script type="text/javascript" src="game.js"></script>
     <script type="text/javascript" src="classes.js"></script>
-</body>
+  </body>
 </html>

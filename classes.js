@@ -7,8 +7,9 @@ class Robot {
     this.width = width;
     this.height = height;
     this.image = new Image();
-    this.image.src = 'images/robot.png';
+    this.image.src = 'images/robot draw.png';
     this.ctx = ctx;
+
 }
     draw() {
         this.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
@@ -27,26 +28,15 @@ class Robot {
     moveDown() {
         this.y +=15
     }
+}
 
-    moveUpLeft() {
-        this.x -= 15;
-        this.y -= 15;
-    }
+function callTime(){
+    imagesMoving = setTimeout(change(),20)}
 
-    moveUpRight() {
-        this.x += 15;
-        this.y -= 15;
-    }
 
-    moveDownLeft() {
-        this.x -= 15;
-        this.y += 15;
-    }
-
-    moveDownRight() {
-        this.x += 15;
-        this.y += 15;
-    }
+function change(){
+    cont++;
+    if(cont >4){cont=0 }
 }
 
 class Zombies {
@@ -56,7 +46,7 @@ class Zombies {
         this.width = 40;
         this.height = 60;
         this.image = new Image();
-        this.image.src = 'images/zombie.png';
+        this.image.src = 'images/zombie.png'
         this.ctx = ctx;
 }
 
@@ -64,7 +54,7 @@ class Zombies {
         this.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
     }
     moveLeft() {
-        this.x -= 7;
+        this.x -= 5;
     }
 
 }
@@ -73,7 +63,7 @@ class Humans {
     constructor (x, y,ctx ){
         this.x = x;
         this.y = y;
-        this.width = 20;
+        this.width = 25;
         this.height = 40;
         this.image = new Image();
         this.image.src = 'images/human.png';

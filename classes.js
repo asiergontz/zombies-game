@@ -54,7 +54,7 @@ class Zombies {
         this.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
     }
     moveLeft() {
-        this.x -= 5;
+        this.x -= 50;
     }
 
 }
@@ -74,6 +74,6 @@ class Humans {
         this.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
     }
     moveUp() {
-        this.y -= 5;
+        this.y -= 4;
     }
 }

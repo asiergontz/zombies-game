@@ -28,8 +28,31 @@ margin: auto;
     background-image: url(images/Button-PNG.png);
     background-size: cover;
     background-position: center; 
-    width: 280px;
-    height: 120px;
+    width: 260px;
+    height: 100px;
     border: none; 
     cursor: pointer;
 }
+
+#game-over-screen {
+    display: none;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 700px;
+    height: 400px;
+    background-image: url(/Images/gameover1.png);
+    background-size: cover;
+    background-position: center; 
+    border: 5px solid black;
+    border-radius: 20px
+  }
+
+#boton-gameover{
+    position: absolute;
+    top: 280px;
+    left: 350px;
+    transform: translateX(-50%);
+}
+

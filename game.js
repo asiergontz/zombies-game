@@ -4,6 +4,7 @@ window.onload = () => {
     const gameboard = document.getElementById("game-board")
     const canvas = document.createElement("canvas");
     const ctx = canvas.getContext('2d')
+    
 
     document.getElementById('start-button').onclick = () => {
         instructions.style.display = "none";
@@ -61,13 +62,18 @@ function startGame () {
         ctx
       )
 
+    // ------------------ interval ------------------ //
     const gameInterval = setInterval(() => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
     robot.draw();
 
+        // show score on canvas
+        ctx.font = "15px Chalkduster";
+        ctx.fillStyle = "Red";
+        ctx.fillText("Humans saved: " + humansSaved, 40, 65);
+        ctx.fillText("Humans killed: " + humansDead, 40, 100)
 
-    
     zombies.forEach((zombie) => {
         zombie.draw();
         zombie.moveLeft();
@@ -83,7 +89,7 @@ function startGame () {
     // Create random zombie //
 
     if (frames % 40 === 0) {
-        const randomY = Math.floor(Math.random() * canvas.height - 60);
+        const randomY = Math.floor(Math.random() * (540 - 170 + 1)) + 170;;
         const zombie = new Zombies(canvas.width, randomY, ctx);
         zombies.push(zombie);
       }
@@ -137,7 +143,7 @@ if (zombie.x < 0) {
 
     // remove humans if they reach the boat//
 humans.forEach((human, index) => {
-if (human.y < 0) {
+if (human.y < 180) {
    humans.splice(index, 1)
     humansSaved++
 }

@@ -56,3 +56,17 @@ margin: auto;
     transform: translateX(-50%);
 }
 
+#game-won-screen {
+    display: none;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 700px;
+    height: 400px;
+    background-image: url(/Images/gamewon.png);
+    background-size: cover;
+    background-position: center; 
+    border: 5px solid black;
+    border-radius: 20px
+}

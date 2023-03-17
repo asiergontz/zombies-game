@@ -88,7 +88,7 @@ function startGame () {
 
     // Create random zombie //
 
-    if (frames % 5 === 0) {
+    if (frames % 50 === 0) {
         const randomY = Math.floor(Math.random() * (540 - 170 + 1)) + 170;;
         const zombie = new Zombies(canvas.width, randomY, ctx);
         zombies.push(zombie);
@@ -156,11 +156,20 @@ function gameOver() {
     gameOverScreen.style.display = "block";
   }
 
+function gameWon() {
+    clearInterval(gameInterval);
+    const gameWonScreen = document.getElementById("game-won-screen");
+    gameWonScreen.style.display = "block";
+  }
+
+
 function restartGame() {
     humansSaved = 0;
     humansDead = 0;
     const gameOverScreen = document.getElementById("game-over-screen");
     gameOverScreen.style.display = "none";
+    const gameWonScreen = document.getElementById("game-won-screen");
+    gameWonScreen.style.display = "none";
     startGame();
 }
 
@@ -168,9 +177,13 @@ gameOverScreen = document.getElementById("game-over-screen").onclick = () => {
     restartGame()
 }
 
-if (humansSaved === 100) {
+gameWonScreen = document.getElementById("game-won-screen").onclick = () => {
+    restartGame()
+}
+
+if (humansSaved === 70) {
     clearInterval(gameInterval)
-    console.log("YOU WON!")
+    gameWon()
 }
 
 if (humansDead === 10) {

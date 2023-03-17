@@ -4,6 +4,7 @@ window.onload = () => {
     const gameboard = document.getElementById("game-board")
     const canvas = document.createElement("canvas");
     const ctx = canvas.getContext('2d')
+
     
 
     document.getElementById('start-button').onclick = () => {
@@ -17,7 +18,9 @@ window.onload = () => {
 
 
 
-
+    const chaseMusic = new Audio('/sounds/chase-music.mp3');
+    chaseMusic.volume = 0.8;
+    chaseMusic.play();
 
 // ------------------ random variables ------------------ //
 
@@ -39,6 +42,10 @@ function startGame () {
     let frames = 0
     let zombies = []
     let humans = []
+    
+    const chaseMusic = new Audio('/sounds/chase-music.mp3');
+    chaseMusic.volume = 0.6;
+    chaseMusic.play();
 
     // ------------------ the gang ------------------ //
 
@@ -112,8 +119,10 @@ function startGame () {
         robot.x + robot.width > zombie.x &&
         robot.y < zombie.y + zombie.height &&
         robot.y + robot.height > zombie.y) {
-            zombies.splice(index, 1)
-            console.log("zombie death");
+            zombies.splice(index, 1);
+        const kill = new Audio('/sounds/kill.wav');
+            kill.volume = 0.6;
+            kill.play();
         }
 })
 // Human - Zombie //
@@ -125,7 +134,7 @@ humans.forEach(function(human, i) {
         zombie.y + zombie.height > human.y &&
         zombie.y < human.y + human.height) {
         humans.splice(i, 1);
-        console.log(humansDead++)
+        humansDead++
       }
     });
   });
@@ -154,12 +163,19 @@ function gameOver() {
     clearInterval(gameInterval);
     const gameOverScreen = document.getElementById("game-over-screen");
     gameOverScreen.style.display = "block";
+    const zombieSound = new Audio('/sounds/zombies-eating.mp3');
+    zombieSound.play();
+    chaseMusic.pause()
   }
 
 function gameWon() {
     clearInterval(gameInterval);
     const gameWonScreen = document.getElementById("game-won-screen");
     gameWonScreen.style.display = "block";
+    const takeOff = new Audio('/sounds/airplane-takeoff.mp3');
+    takeOff.volume = 0.1;
+    takeOff.play();
+    chaseMusic.pause()
   }
 
 
@@ -181,7 +197,7 @@ gameWonScreen = document.getElementById("game-won-screen").onclick = () => {
     restartGame()
 }
 
-if (humansSaved === 70) {
+if (humansSaved === 7) {
     clearInterval(gameInterval)
     gameWon()
 }

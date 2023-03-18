@@ -4,6 +4,7 @@ class Robot {
     constructor (x, y, width, height, ctx ){
     this.x = x;
     this.y = y;
+    this.z = 0
     this.width = width;
     this.height = height;
     this.image = new Image();
@@ -43,8 +44,8 @@ class Zombies {
     constructor (x, y, ctx ){
         this.x = x;
         this.y = y;
-        this.width = 40;
-        this.height = 60;
+        this.width = 30;
+        this.height = 50;
         this.image = new Image();
         this.image.src = 'images/zombie.png'
         this.ctx = ctx;
@@ -54,7 +55,7 @@ class Zombies {
         this.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
     }
     moveLeft() {
-        this.x -=5;
+        this.x -=6;
     }
 
 }
@@ -75,5 +76,24 @@ class Humans {
     }
     moveUp() {
         this.y -= 4;
+    }
+}
+
+class Blood{
+    constructor (x,y,ctx){
+        this.x= x;
+        this.y= y;
+        this.z = 1
+        this.width= 30;
+        this.height= 30;
+        this.image= new Image();
+        this.image.src= "/Images/blood.png";
+        this.ctx = ctx;
+    }
+
+    draw() {
+        this.ctx.globalAlpha = 0.7
+        this.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+        this.ctx.globalAlpha = 1
     }
 }

@@ -18,10 +18,6 @@ window.onload = () => {
 
 
 
-    const chaseMusic = new Audio('/sounds/chase-music.mp3');
-    chaseMusic.volume = 0.8;
-    chaseMusic.play();
-
 // ------------------ random variables ------------------ //
 
 const randomY = Math.floor(Math.random() * canvas.height);
@@ -42,6 +38,7 @@ function startGame () {
     let frames = 0
     let zombies = []
     let humans = []
+    let bloods = []
     
     const chaseMusic = new Audio('/sounds/chase-music.mp3');
     chaseMusic.volume = 0.6;
@@ -53,7 +50,7 @@ function startGame () {
         canvas.width / 2,
         canvas.height /2,
         50,
-        100,
+        80,
         ctx
       )
     
@@ -69,13 +66,14 @@ function startGame () {
         ctx
       )
 
+
     // ------------------ interval ------------------ //
     const gameInterval = setInterval(() => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
     robot.draw();
 
-        // show score on canvas
+        // show score on canvas //
         ctx.font = "15px Chalkduster";
         ctx.fillStyle = "Red";
         ctx.fillText("Humans saved: " + humansSaved + "/70", 40, 65);
@@ -95,13 +93,13 @@ function startGame () {
 
     // Create random zombie //
 
-    if (frames % 50 === 0) {
+    if (frames % 30 === 0) {
         const randomY = Math.floor(Math.random() * (540 - 170 + 1)) + 170;;
         const zombie = new Zombies(canvas.width, randomY, ctx);
         zombies.push(zombie);
       }
       
-      // Create random human //
+    // Create random human //
 
 
     if (frames % 15 === 0){
@@ -113,6 +111,8 @@ function startGame () {
 
  // ------------------ Collisions ------------------//
 
+ 
+
 // Robot - Zombie //
  zombies.forEach((zombie, index) => {
     if (robot.x < zombie.x + zombie.width &&
@@ -123,8 +123,15 @@ function startGame () {
         const kill = new Audio('/sounds/kill.wav');
             kill.volume = 0.6;
             kill.play();
+        const newBlood = new Blood(zombie.x, zombie.y + 20, ctx);
+            bloods.push(newBlood);
         }
 })
+
+bloods.forEach((blood) => {
+    blood.draw();
+});
+
 // Human - Zombie //
 
 humans.forEach(function(human, i) {
@@ -141,7 +148,7 @@ humans.forEach(function(human, i) {
 
 
 
-    // remove zombies if they reach the limit//
+// remove zombies if they reach the limit//
 
 zombies.forEach((zombie, index) => {  
 if (zombie.x < 0) {
@@ -150,7 +157,7 @@ if (zombie.x < 0) {
 })
 
 
-    // remove humans if they reach the boat//
+// remove humans if they reach the boat//
 humans.forEach((human, index) => {
 if (human.y < 180) {
    humans.splice(index, 1)
@@ -164,6 +171,7 @@ function gameOver() {
     const gameOverScreen = document.getElementById("game-over-screen");
     gameOverScreen.style.display = "block";
     const zombieSound = new Audio('/sounds/zombies-eating.mp3');
+    zombieSound.volume = 0.1;
     zombieSound.play();
     chaseMusic.pause()
   }
@@ -197,7 +205,7 @@ gameWonScreen = document.getElementById("game-won-screen").onclick = () => {
     restartGame()
 }
 
-if (humansSaved === 7) {
+if (humansSaved === 70) {
     clearInterval(gameInterval)
     gameWon()
 }

@@ -55,7 +55,7 @@ class Zombies {
         this.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
     }
     moveLeft() {
-        this.x -=6;
+        this.x -=5;
     }
 
 }

@@ -205,12 +205,12 @@ gameWonScreen = document.getElementById("game-won-screen").onclick = () => {
     restartGame()
 }
 
-if (humansSaved === 70) {
+if (humansSaved === 20) {
     clearInterval(gameInterval)
     gameWon()
 }
 
-if (humansDead === 10) {
+if (humansDead === 7) {
     clearInterval(gameInterval)
     gameOver();
 }
